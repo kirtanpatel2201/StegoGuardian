@@ -107,7 +107,7 @@ cd StegoGuardian/stego_secure_system
 ## 3️⃣ Install Required Libraries
 
 ```
-pip install flask pillow cryptography
+pip install -r requirements.txt
 ```
 
 ## 4️⃣ Run Application
