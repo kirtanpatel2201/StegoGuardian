@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Secure Steganography Communication System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Orbitron',sans-serif;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+}
+
+.header{
+padding:20px;
+text-align:center;
+background:#00000080;
+font-size:28px;
+border-bottom:1px solid #00ffcc;
+}
+
+.container{
+display:flex;
+}
+
+.sidebar{
+width:260px;
+background:#00000060;
+padding:30px;
+}
+
+.sidebar h3{
+color:#00ffcc;
+}
+
+.sidebar ul{
+list-style:none;
+padding:0;
+}
+
+.sidebar li{
+padding:10px 0;
+border-bottom:1px solid #00ffcc30;
+}
+
+.main{
+flex:1;
+padding:40px;
+display:flex;
+flex-direction:column;
+gap:30px;
+}
+
+.card{
+background:#00000060;
+padding:30px;
+border-radius:15px;
+border:1px solid #00ffcc40;
+}
+
+textarea,input{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:20px;
+background:#111;
+color:white;
+border-radius:8px;
+border:1px solid #00ffcc40;
+}
+
+textarea{
+height:120px;
+}
+
+button{
+padding:12px 30px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#00ffcc,#00ffaa);
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #00ffcc;
+}
+
+
+.keybox{
+background:#000;
+padding:15px;
+border-radius:10px;
+border:1px solid #00ffcc40;
+font-size:14px;
+font-family:monospace;   /* normal font for keys */
+word-wrap:break-word;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+🔐 Secure Steganography Communication System
+</div>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h3>Project Stack</h3>
+
+<ul>
+<li>Python Flask</li>
+<li>RSA Cryptography</li>
+<li>Steganography</li>
+<li>Secure File Embedding</li>
+</ul>
+
+<h3>Supported Files</h3>
+
+<ul>
+<li>.txt</li>
+<li>.pdf</li>
+<li>.png</li>
+</ul>
+
+</div>
+
+<div class="main">
+
+<div class="card">
+
+<h2>Embed Secret Message</h2>
+
+<form action="/embed" method="post" enctype="multipart/form-data">
+
+<label>Secret Message</label>
+<textarea name="message" required></textarea>
+
+<label>Select Carrier File</label>
+<input type="file" name="file" required>
+
+<button type="submit">Encrypt & Embed</button>
+
+</form>
+
+</div>
+
+{% if public_key %}
+
+<div class="card">
+
+<h3>Public Key</h3>
+
+<div class="keybox">{{public_key}}</div>
+
+<h3>Private Key</h3>
+
+<div class="keybox">{{private_key}}</div>
+
+<p style="color:#00ffcc">
+Download started. Check your browser downloads.
+</p>
+
+<a href="/download/{{download_file}}">
+<button>Download Embedded File</button>
+</a>
+
+</div>
+
+<script>
+window.onload = function(){
+window.location.href="/download/{{download_file}}";
+}
+</script>
+
+{% endif %}
+
+<div class="card">
+
+<h2>Extract Hidden Message</h2>
+
+<form action="/extract" method="post" enctype="multipart/form-data">
+
+<label>Private Key</label>
+<textarea name="private_key" required></textarea>
+
+<label>Upload Embedded File</label>
+<input type="file" name="file" required>
+
+<button type="submit">Decrypt Message</button>
+
+</form>
+
+</div>
+
+{% if extracted_message %}
+
+<div class="card">
+
+<h2>Extracted Message</h2>
+
+<p>{{extracted_message}}</p>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</body>
+</html>
